@@ -8,4 +8,5 @@ $baseDir = dirname($vendorDir);
 return array(
     'Skernl\\Container\\' => array($baseDir . '/src'),
     'Psr\\Container\\' => array($vendorDir . '/psr/container/src'),
+    'Library\\' => array($baseDir . '/test/Library'),
 );

@@ -1,7 +1,7 @@
 <?php
 declare(strict_types=1);
 
-namespace Skernl\Container\Exception;
+namespace Skernl\Container\Collector\Exception;
 
 use Psr\Container\NotFoundExceptionInterface;
 use Throwable;

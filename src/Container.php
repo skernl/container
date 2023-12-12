@@ -2,13 +2,22 @@
 declare(strict_types=1);
 
 namespace Skernl\Container;
+
+/**
+ * @Container
+ * @\Skernl\Container\Container
+ */
 final class Container implements ContainerInterface
 {
+    /**
+     * @var array $container
+     */
+    private array $container;
 
     /**
      * @var Container|null
      */
-    private static Container|null $container;
+    private static Container|null $instances;
 
     private function __construct()
     {
@@ -19,7 +28,7 @@ final class Container implements ContainerInterface
      */
     public function __clone()
     {
-        return Container::$container;
+        return Container::$instances;
     }
 
     /**
@@ -27,11 +36,11 @@ final class Container implements ContainerInterface
      */
     static public function getContainer(): Container
     {
-        if (null === Container::$container) {
-            Container::$container = new Container;
+        if (null === Container::$instances) {
+            Container::$instances = new Container;
         }
 
-        return Container::$container;
+        return Container::$instances;
     }
 
     /**
@@ -40,7 +49,9 @@ final class Container implements ContainerInterface
      */
     public function get(string $id): object
     {
-        // TODO: Implement get() method.
+        if ($this->has($id)) {
+            return Container::$instances;
+        }
     }
 
     /**
@@ -49,6 +60,5 @@ final class Container implements ContainerInterface
      */
     public function has(string $id): bool
     {
-        // TODO: Implement has() method.
     }
 }

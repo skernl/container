@@ -1,7 +1,7 @@
 <?php
 declare(strict_types=1);
 
-namespace Skernl\Container\Reflection;
+namespace Skernl\Container\Collector\Reflection;
 
 /**
  * @ReflectionManager

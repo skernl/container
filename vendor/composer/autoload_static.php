@@ -6,6 +6,10 @@ namespace Composer\Autoload;
 
 class ComposerStaticInit040d9e6b7e9a56fe2de2e9ad2eb3105f
 {
+    public static $files = array (
+        '2a4186ef2795701e91b30ded40619c1e' => __DIR__ . '/../..' . '/src/config.php',
+    );
+
     public static $prefixLengthsPsr4 = array (
         'S' => 
         array (
@@ -14,6 +18,10 @@ class ComposerStaticInit040d9e6b7e9a56fe2de2e9ad2eb3105f
         'P' => 
         array (
             'Psr\\Container\\' => 14,
+        ),
+        'L' => 
+        array (
+            'Library\\' => 8,
         ),
     );
 
@@ -25,6 +33,10 @@ class ComposerStaticInit040d9e6b7e9a56fe2de2e9ad2eb3105f
         'Psr\\Container\\' => 
         array (
             0 => __DIR__ . '/..' . '/psr/container/src',
+        ),
+        'Library\\' => 
+        array (
+            0 => __DIR__ . '/../..' . '/test/Library',
         ),
     );
 
