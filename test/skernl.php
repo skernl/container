@@ -3,40 +3,14 @@ declare(strict_types=1);
 
 use Skernl\Container\Container;
 
-require dirname(__DIR__) . "/vendor/autoload.php";
-
+$composer = require dirname(__DIR__) . "/vendor/autoload.php";
 
 $container = Container::getContainer();
 
-/** @noinspection PhpUnhandledExceptionInspection */
-$tokenLibrary = $container->get(Library\TokenLibrary::class);
+var_dump($composer->getClassMap());
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+///** @noinspection PhpUnhandledExceptionInspection */
+//$tokenLibrary = $container->get(Library\TokenLibrary::class);
 
 
 //$reflectionClass1 = new ReflectionClass(Library\TokenLibrary::class);

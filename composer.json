@@ -19,6 +19,7 @@
     "require": {
         "php": ">=8.2",
         "psr/container": "^2.0@dev",
-        "skernl/contract": "dev-main"
+        "skernl/di": "dev-main",
+        "skernl/contract": "v0.0.3"
     }
 }

@@ -6,6 +6,7 @@ $vendorDir = dirname(__DIR__);
 $baseDir = dirname($vendorDir);
 
 return array(
+    'Skernl\\Di\\' => array($vendorDir . '/skernl/di/src'),
     'Skernl\\Contract\\' => array($vendorDir . '/skernl/contract/src'),
     'Skernl\\Container\\' => array($baseDir . '/src'),
     'Psr\\Log\\' => array($vendorDir . '/psr/log/src'),

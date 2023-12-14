@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "eaa83e79bb7a03c32be2fdf6b5267312",
+    "content-hash": "c47a71cd3f3bf62fcee08435f48b70a4",
     "packages": [
         {
             "name": "psr/cache",
@@ -220,16 +220,16 @@
         },
         {
             "name": "skernl/contract",
-            "version": "dev-main",
+            "version": "v0.0.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/skernl/contract.git",
-                "reference": "b2fa53e3c2c14d9efc8e4a8ef08e0643e4135ee7"
+                "reference": "a9e68b8b6fe4ab8e0973e0252bb16be793241090"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/skernl/contract/zipball/b2fa53e3c2c14d9efc8e4a8ef08e0643e4135ee7",
-                "reference": "b2fa53e3c2c14d9efc8e4a8ef08e0643e4135ee7",
+                "url": "https://api.github.com/repos/skernl/contract/zipball/a9e68b8b6fe4ab8e0973e0252bb16be793241090",
+                "reference": "a9e68b8b6fe4ab8e0973e0252bb16be793241090",
                 "shasum": ""
             },
             "require": {
@@ -239,12 +239,14 @@
                 "psr/http-message": "^2.0",
                 "psr/log": "^3.0.0"
             },
-            "default-branch": true,
             "type": "library",
             "autoload": {
                 "psr-4": {
                     "Skernl\\Contract\\": "src/"
-                }
+                },
+                "classmap": [
+                    "src"
+                ]
             },
             "notification-url": "https://packagist.org/downloads/",
             "license": [
@@ -258,9 +260,49 @@
             ],
             "support": {
                 "issues": "https://github.com/skernl/contract/issues",
-                "source": "https://github.com/skernl/contract/tree/main"
+                "source": "https://github.com/skernl/contract/tree/v0.0.3"
             },
-            "time": "2023-12-14T03:06:02+00:00"
+            "time": "2023-12-14T06:37:27+00:00"
+        },
+        {
+            "name": "skernl/di",
+            "version": "dev-main",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/skernl/di.git",
+                "reference": "01a9b8c5747bc3f47122a2b3f85d118a855f707d"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/skernl/di/zipball/01a9b8c5747bc3f47122a2b3f85d118a855f707d",
+                "reference": "01a9b8c5747bc3f47122a2b3f85d118a855f707d",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=8.2"
+            },
+            "default-branch": true,
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Skernl\\Di\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "wheakerd",
+                    "email": "wheakerd@qq.com"
+                }
+            ],
+            "support": {
+                "issues": "https://github.com/skernl/di/issues",
+                "source": "https://github.com/skernl/di/tree/main"
+            },
+            "time": "2023-12-14T05:55:01+00:00"
         }
     ],
     "packages-dev": [],
@@ -268,7 +310,7 @@
     "minimum-stability": "dev",
     "stability-flags": {
         "psr/container": 20,
-        "skernl/contract": 20
+        "skernl/di": 20
     },
     "prefer-stable": false,
     "prefer-lowest": false,
