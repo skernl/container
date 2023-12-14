@@ -7,10 +7,7 @@
         "psr-4": {
             "Skernl\\Container\\": "src/",
             "Library\\": "test/Library/"
-        },
-        "files": [
-            "src/config.php"
-        ]
+        }
     },
     "authors": [
         {
@@ -21,6 +18,7 @@
     "minimum-stability": "dev",
     "require": {
         "php": ">=8.2",
-        "psr/container": "^2.0@dev"
+        "psr/container": "^2.0@dev",
+        "skernl/contract": "dev-main"
     }
 }

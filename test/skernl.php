@@ -6,16 +6,10 @@ use Skernl\Container\Container;
 require dirname(__DIR__) . "/vendor/autoload.php";
 
 
-//$container = Container::getContainer();
+$container = Container::getContainer();
 
-
-//$container->get(Library\TokenLibrary::class);
-
-
-$classMap = new \Composer\Autoload\ClassLoader();
-
-var_dump($classMap->getClassMap());
-
+/** @noinspection PhpUnhandledExceptionInspection */
+$tokenLibrary = $container->get(Library\TokenLibrary::class);
 
 
 
