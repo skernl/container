@@ -28,7 +28,7 @@ final class Container implements ContainerInterface
     /**
      * @return Container|null
      */
-    public function __clone()
+    private function __clone()
     {
         return Container::$instances;
     }

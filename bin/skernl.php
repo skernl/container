@@ -1,16 +1,11 @@
 <?php
 declare(strict_types=1);
 
+use Composer\InstalledVersions;
+
 require dirname(__DIR__) . "/vendor/autoload.php";
 
-$classMap = Composer\Autoload\ClassLoader::getRegisteredLoaders();
-
-var_dump($classMap);
-
-
-
-
-
+var_dump($GLOBALS);
 
 
 

@@ -34,6 +34,8 @@ return array(
     'Skernl\\Container\\Collector\\MetadataCacheCollector' => $baseDir . '/src/Collector/MetadataCacheCollector.php',
     'Skernl\\Container\\Collector\\MetadataCollector' => $baseDir . '/src/Collector/MetadataCollector.php',
     'Skernl\\Container\\Container' => $baseDir . '/src/Container.php',
+    'Skernl\\Container\\Exception\\ContainerException' => $baseDir . '/src/Exception/ContainerException.php',
+    'Skernl\\Container\\Exception\\NotFoundException' => $baseDir . '/src/Exception/NotFoundException.php',
     'Skernl\\Container\\Reflection\\ReflectionManager' => $baseDir . '/src/Reflection/ReflectionManager.php',
     'Skernl\\Contract\\Cache\\CacheItemInterface' => $vendorDir . '/skernl/contract/src/Cache/CacheItemInterface.php',
     'Skernl\\Contract\\Cache\\CacheItemPoolInterface' => $vendorDir . '/skernl/contract/src/Cache/CacheItemPoolInterface.php',

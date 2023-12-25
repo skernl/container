@@ -89,6 +89,8 @@ class ComposerStaticInit040d9e6b7e9a56fe2de2e9ad2eb3105f
         'Skernl\\Container\\Collector\\MetadataCacheCollector' => __DIR__ . '/../..' . '/src/Collector/MetadataCacheCollector.php',
         'Skernl\\Container\\Collector\\MetadataCollector' => __DIR__ . '/../..' . '/src/Collector/MetadataCollector.php',
         'Skernl\\Container\\Container' => __DIR__ . '/../..' . '/src/Container.php',
+        'Skernl\\Container\\Exception\\ContainerException' => __DIR__ . '/../..' . '/src/Exception/ContainerException.php',
+        'Skernl\\Container\\Exception\\NotFoundException' => __DIR__ . '/../..' . '/src/Exception/NotFoundException.php',
         'Skernl\\Container\\Reflection\\ReflectionManager' => __DIR__ . '/../..' . '/src/Reflection/ReflectionManager.php',
         'Skernl\\Contract\\Cache\\CacheItemInterface' => __DIR__ . '/..' . '/skernl/contract/src/Cache/CacheItemInterface.php',
         'Skernl\\Contract\\Cache\\CacheItemPoolInterface' => __DIR__ . '/..' . '/skernl/contract/src/Cache/CacheItemPoolInterface.php',
