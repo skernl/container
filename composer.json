@@ -20,6 +20,12 @@
     ],
     "minimum-stability": "dev",
     "require": {
-        "psr/container": "^2.0@dev"
+        "php": ">=8.2",
+        "psr/container": "^2.0@dev",
+        "skernl/contract": "dev-main"
+    },
+    "config": {
+        "optimize-autoloader": true,
+        "sort-packages": true
     }
 }

@@ -1,21 +1,11 @@
 <?php
 declare(strict_types=1);
 
-use Skernl\Container\Container;
-
 require dirname(__DIR__) . "/vendor/autoload.php";
 
+$classMap = Composer\Autoload\ClassLoader::getRegisteredLoaders();
 
-//$container = Container::getContainer();
-
-
-//$container->get(Library\TokenLibrary::class);
-
-
-$classMap = new \Composer\Autoload\ClassLoader();
-
-var_dump($classMap->getClassMap());
-
+var_dump($classMap);
 
 
 

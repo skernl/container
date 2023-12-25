@@ -3,6 +3,8 @@ declare(strict_types=1);
 
 namespace Skernl\Container;
 
+use Skernl\Contract\ContainerInterface;
+
 /**
  * @Container
  * @\Skernl\Container\Container

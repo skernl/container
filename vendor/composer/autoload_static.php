@@ -13,11 +13,15 @@ class ComposerStaticInit040d9e6b7e9a56fe2de2e9ad2eb3105f
     public static $prefixLengthsPsr4 = array (
         'S' => 
         array (
+            'Skernl\\Contract\\' => 16,
             'Skernl\\Container\\' => 17,
         ),
         'P' => 
         array (
+            'Psr\\Log\\' => 8,
+            'Psr\\Http\\Message\\' => 17,
             'Psr\\Container\\' => 14,
+            'Psr\\Cache\\' => 10,
         ),
         'L' => 
         array (
@@ -26,13 +30,29 @@ class ComposerStaticInit040d9e6b7e9a56fe2de2e9ad2eb3105f
     );
 
     public static $prefixDirsPsr4 = array (
+        'Skernl\\Contract\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/skernl/contract/src',
+        ),
         'Skernl\\Container\\' => 
         array (
             0 => __DIR__ . '/../..' . '/src',
         ),
+        'Psr\\Log\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/psr/log/src',
+        ),
+        'Psr\\Http\\Message\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/psr/http-message/src',
+        ),
         'Psr\\Container\\' => 
         array (
             0 => __DIR__ . '/..' . '/psr/container/src',
+        ),
+        'Psr\\Cache\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/psr/cache/src',
         ),
         'Library\\' => 
         array (
@@ -42,6 +62,45 @@ class ComposerStaticInit040d9e6b7e9a56fe2de2e9ad2eb3105f
 
     public static $classMap = array (
         'Composer\\InstalledVersions' => __DIR__ . '/..' . '/composer/InstalledVersions.php',
+        'Library\\Annotation\\Inject' => __DIR__ . '/../..' . '/test/Library/Annotation/Inject.php',
+        'Library\\TokenLibrary' => __DIR__ . '/../..' . '/test/Library/TokenLibrary.php',
+        'Psr\\Cache\\CacheException' => __DIR__ . '/..' . '/psr/cache/src/CacheException.php',
+        'Psr\\Cache\\CacheItemInterface' => __DIR__ . '/..' . '/psr/cache/src/CacheItemInterface.php',
+        'Psr\\Cache\\CacheItemPoolInterface' => __DIR__ . '/..' . '/psr/cache/src/CacheItemPoolInterface.php',
+        'Psr\\Cache\\InvalidArgumentException' => __DIR__ . '/..' . '/psr/cache/src/InvalidArgumentException.php',
+        'Psr\\Container\\ContainerExceptionInterface' => __DIR__ . '/..' . '/psr/container/src/ContainerExceptionInterface.php',
+        'Psr\\Container\\ContainerInterface' => __DIR__ . '/..' . '/psr/container/src/ContainerInterface.php',
+        'Psr\\Container\\NotFoundExceptionInterface' => __DIR__ . '/..' . '/psr/container/src/NotFoundExceptionInterface.php',
+        'Psr\\Http\\Message\\MessageInterface' => __DIR__ . '/..' . '/psr/http-message/src/MessageInterface.php',
+        'Psr\\Http\\Message\\RequestInterface' => __DIR__ . '/..' . '/psr/http-message/src/RequestInterface.php',
+        'Psr\\Http\\Message\\ResponseInterface' => __DIR__ . '/..' . '/psr/http-message/src/ResponseInterface.php',
+        'Psr\\Http\\Message\\ServerRequestInterface' => __DIR__ . '/..' . '/psr/http-message/src/ServerRequestInterface.php',
+        'Psr\\Http\\Message\\StreamInterface' => __DIR__ . '/..' . '/psr/http-message/src/StreamInterface.php',
+        'Psr\\Http\\Message\\UploadedFileInterface' => __DIR__ . '/..' . '/psr/http-message/src/UploadedFileInterface.php',
+        'Psr\\Http\\Message\\UriInterface' => __DIR__ . '/..' . '/psr/http-message/src/UriInterface.php',
+        'Psr\\Log\\AbstractLogger' => __DIR__ . '/..' . '/psr/log/src/AbstractLogger.php',
+        'Psr\\Log\\InvalidArgumentException' => __DIR__ . '/..' . '/psr/log/src/InvalidArgumentException.php',
+        'Psr\\Log\\LogLevel' => __DIR__ . '/..' . '/psr/log/src/LogLevel.php',
+        'Psr\\Log\\LoggerAwareInterface' => __DIR__ . '/..' . '/psr/log/src/LoggerAwareInterface.php',
+        'Psr\\Log\\LoggerAwareTrait' => __DIR__ . '/..' . '/psr/log/src/LoggerAwareTrait.php',
+        'Psr\\Log\\LoggerInterface' => __DIR__ . '/..' . '/psr/log/src/LoggerInterface.php',
+        'Psr\\Log\\LoggerTrait' => __DIR__ . '/..' . '/psr/log/src/LoggerTrait.php',
+        'Psr\\Log\\NullLogger' => __DIR__ . '/..' . '/psr/log/src/NullLogger.php',
+        'Skernl\\Container\\Collector\\MetadataCacheCollector' => __DIR__ . '/../..' . '/src/Collector/MetadataCacheCollector.php',
+        'Skernl\\Container\\Collector\\MetadataCollector' => __DIR__ . '/../..' . '/src/Collector/MetadataCollector.php',
+        'Skernl\\Container\\Container' => __DIR__ . '/../..' . '/src/Container.php',
+        'Skernl\\Container\\Reflection\\ReflectionManager' => __DIR__ . '/../..' . '/src/Reflection/ReflectionManager.php',
+        'Skernl\\Contract\\Cache\\CacheItemInterface' => __DIR__ . '/..' . '/skernl/contract/src/Cache/CacheItemInterface.php',
+        'Skernl\\Contract\\Cache\\CacheItemPoolInterface' => __DIR__ . '/..' . '/skernl/contract/src/Cache/CacheItemPoolInterface.php',
+        'Skernl\\Contract\\ContainerInterface' => __DIR__ . '/..' . '/skernl/contract/src/ContainerInterface.php',
+        'Skernl\\Contract\\HttpMessage\\MessageInterface' => __DIR__ . '/..' . '/skernl/contract/src/HttpMessage/MessageInterface.php',
+        'Skernl\\Contract\\HttpMessage\\RequestInterface' => __DIR__ . '/..' . '/skernl/contract/src/HttpMessage/RequestInterface.php',
+        'Skernl\\Contract\\HttpMessage\\ResponseInterface' => __DIR__ . '/..' . '/skernl/contract/src/HttpMessage/ResponseInterface.php',
+        'Skernl\\Contract\\HttpMessage\\ServerRequestInterface' => __DIR__ . '/..' . '/skernl/contract/src/HttpMessage/ServerRequestInterface.php',
+        'Skernl\\Contract\\HttpMessage\\StreamInterface' => __DIR__ . '/..' . '/skernl/contract/src/HttpMessage/StreamInterface.php',
+        'Skernl\\Contract\\HttpMessage\\UploadedFileInterface' => __DIR__ . '/..' . '/skernl/contract/src/HttpMessage/UploadedFileInterface.php',
+        'Skernl\\Contract\\HttpMessage\\UriInterface' => __DIR__ . '/..' . '/skernl/contract/src/HttpMessage/UriInterface.php',
+        'Skernl\\Contract\\LoggerInterface' => __DIR__ . '/..' . '/skernl/contract/src/LoggerInterface.php',
     );
 
     public static function getInitializer(ClassLoader $loader)
