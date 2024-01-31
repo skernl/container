@@ -1,25 +1,32 @@
 {
     "name": "skernl/container",
-    "description": "A container for the skernl framework",
     "type": "library",
+    "keywords": [
+        "php",
+        "swoole",
+        "framework",
+        "skernl",
+        "container"
+    ],
     "license": "MIT",
     "autoload": {
         "psr-4": {
-            "Skernl\\Container\\": "src/",
-            "Library\\": "test/Library/"
+            "Skernl\\Container\\": "src/"
         }
     },
     "authors": [
         {
             "name": "wheakerd",
             "email": "wheakerd@qq.com"
+        },
+        {
+            "name": "wheakerd",
+            "email": "wheakerd@gmail.com"
         }
     ],
     "minimum-stability": "dev",
     "require": {
-        "php": ">=8.2",
-        "psr/container": "^2.0@dev",
-        "skernl/di": "dev-main",
-        "skernl/contract": "v0.0.3"
+        "php": ">=8.3",
+        "skernl/contract": "dev-main"
     }
 }

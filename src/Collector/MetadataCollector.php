@@ -4,52 +4,38 @@ declare(strict_types=1);
 namespace Skernl\Container\Collector;
 
 /**
- * @MetadataCollector
- * @\Skernl\Container\Collector\MetadataCollector
+ * @AbstractMetadataCollector
+ * @\Skernl\Di\Collector\AbstractMetadataCollector
  */
-class MetadataCollector
+class MetadataCollector extends AbstractMetadataCollector
 {
-    /**
-     * @var array $container
-     */
-    static protected array $container = [];
-
-    /**
-     * @param string $key
-     * @param mixed|null $default
-     * @return mixed
-     */
-    static public function get(string $key, mixed $default = null): mixed
+    static public function getAnnotation(string $annotation, string $class, mixed $default = null): mixed
     {
-        return array_key_exists($key, static::$container) ? static::$container [$key] : $default;
+        return self::$storageRoom [self::$annotation] [$annotation] [$class] ?? $default;
     }
 
-    /**
-     * @param string $key
-     * @param mixed $value
-     * @return void
-     */
-    static public function set(string $key, mixed $value): void
+    static public function getAnnotations(string $annotation, mixed $default = []): mixed
     {
-        static::$container [$key] = $value;
+        return self::$storageRoom [self::$annotation] [$annotation] ?? $default;
     }
 
-    /**
-     * @param string $key
-     * @return bool
-     */
-    static public function has(string $key): bool
+    static public function getClass(string $class, string $annotation, mixed $default = null)
     {
-        return array_key_exists($key, static::$container);
+        return self::$storageRoom [self::$class] [$class] [$annotation] ?? $default;
     }
 
-    /**
-     * @param string|null $key
-     * @return void
-     */
-    static public function remove(null|string $key): void
+    static public function getClasses(string $class, mixed $default = null)
     {
-        if (null === $key) static::$container = [];
-        else unset(static::$container [$key]);
+        return self::$storageRoom [self::$class] [$class] ?? $default;
+    }
+
+    static public function getMethod(string $class, string $method, string $annotation, mixed $default = null)
+    {
+        return self::$storageRoom [self::$method] [$class] [$method] [$annotation] ?? $default;
+    }
+
+    static public function getMethods(string $class, mixed $default = null)
+    {
+        return self::$storageRoom [self::$method] [$class] ?? $default;
     }
 }
