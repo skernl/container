@@ -6,8 +6,8 @@ namespace Skernl\Container\Annotation;
 use Attribute;
 
 /**
- * @Inject
- * @\Skernl\Di\Annotation\Inject
+ * @Handler
+ * @\Skernl\Di\Annotation\Handler
  */
 #[Attribute(Attribute::TARGET_PROPERTY)]
 class Inject
