@@ -20,7 +20,7 @@ class ObjectResolver implements ResolverInterface
 {
     private ParameterResolver $parameterResolver;
 
-    public function __construct(private ContainerInterface $container)
+    public function __construct(private readonly ContainerInterface $container)
     {
         $this->parameterResolver = new ParameterResolver($this->container);
     }
@@ -38,9 +38,7 @@ class ObjectResolver implements ResolverInterface
     /**
      * @param DefinitionInterface $definition
      * @return object
-     * @throws ContainerExceptionInterface
      * @throws InvalidDefinitionException
-     * @throws NotFoundExceptionInterface
      */
     public function resolve(DefinitionInterface $definition): object
     {
@@ -58,9 +56,6 @@ class ObjectResolver implements ResolverInterface
     /**
      * @param ObjectDefinition $objectDefinition
      * @return object
-     * @throws ContainerExceptionInterface
-     * @throws InvalidDefinitionException
-     * @throws NotFoundExceptionInterface
      */
     private function createInstance(ObjectDefinition $objectDefinition): object
     {
@@ -68,20 +63,7 @@ class ObjectResolver implements ResolverInterface
             $objectDefinition->getConstructParameters(),
             $objectDefinition->getConstructDefaultParameters(),
         );
-        $instance = new ($objectDefinition->getClassName())(... $parameters);
 
-        /**
-         * @use $instance
-         * @var object $classObject
-         */
-        $classObject = eval(<<<EOF
-            return new class (\$instance) extends {$objectDefinition->getClassName()} {
-                use Skernl\Di\Source\DynamicProxy;
-            };
-        EOF);
-        /**
-         * @var Closure $classObject
-         */
-        return $classObject;
+        return new ($objectDefinition->getClassName())(... $parameters);
     }
 }

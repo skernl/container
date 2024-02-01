@@ -24,12 +24,6 @@ class Composer
     static public function init(): void
     {
         self::loadClassMap();
-        self::mountClassMap(
-            array_keys(
-                self::$classLoader->getClassMap()
-            )
-        );
-        self::$classLoader->unregister();
     }
 
     static public function reflectClass(string $class)
@@ -45,6 +39,12 @@ class Composer
          */
         self::$classLoader = reset($loaders);
         self::mountClassMap(
+            array_keys(
+                self::$classLoader->getClassMap()
+            )
+        );
+        self::$classLoader->unregister();
+        self::reload(
             array_keys(
                 self::$classLoader->getClassMap()
             )
@@ -74,6 +74,13 @@ class Composer
          */
         foreach ($classAnnotations as $annotation) {
             self::$annotation [$annotation->getName()] [$class] = $annotation->getArguments();
+        }
+    }
+
+    static private function reload(array $classes): void
+    {
+        foreach ($classes as $class) {
+            spl_autoload_register(function () {});
         }
     }
 }
