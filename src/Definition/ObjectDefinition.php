@@ -3,29 +3,21 @@ declare(strict_types=1);
 
 namespace Skernl\Container\Definition;
 
-use ReflectionAttribute;
-use ReflectionException;
 use ReflectionParameter;
-use Skernl\Container\Exception\InvalidDefinitionException;
-use Skernl\Container\ReflectionManager;
+use Skernl\Container\Composer;
+use Skernl\Container\Contract\DefinitionInterface;
 
 /**
  * @ObjectDefinition
- * @\Skernl\Di\Definition\ObjectDefinition
+ * @\Skernl\Container\Definition\ObjectDefinition
  */
 class ObjectDefinition implements DefinitionInterface
 {
-    protected bool $classExist;
-    protected bool $instantiable;
+    private bool $instantiable;
 
     public function __construct(private readonly string $className)
     {
-        $this->init();
-    }
-
-    private function init(): void
-    {
-        $this->classExist = ReflectionManager::hasReflectClass($this->className);
+        $this->instantiable = Composer::reflectClass($this->className)->isInstantiable();
     }
 
     public function getClassName(): string
@@ -39,57 +31,22 @@ class ObjectDefinition implements DefinitionInterface
     }
 
     /**
-     * @return ReflectionAttribute[]
-     */
-    public function getClassAnnotations(): array
-    {
-        return $this->reflectionClass->getAttributes();
-    }
-
-//    public function getProperties(): array
-//    {
-//        // TODO: Implement getProperties() method.
-//    }
-//
-    /**
-     * @param string $method
      * @return ReflectionParameter[]
-     * @throws InvalidDefinitionException
      */
-    public function getMethodParameters(string $method): array
+    public function getConstructParameters(): array
     {
-        try {
-            return $this->reflectionClass->getMethod($method)->getParameters();
-        } catch (ReflectionException) {
-            throw new InvalidDefinitionException(
-                sprintf(
-                    'Method %s does not exist in Class %s',
-                    '__construct',
-                    $this->getClassName(),
-                )
-            );
-        }
+        return Composer::reflectClass($this->className)->getConstructor()->getParameters();
     }
 
-    /**
-     * @param string $method
-     * @return array
-     * @throws InvalidDefinitionException
-     */
-    public function getMethodDefaultParameters(string $method): array
+    public function getConstructDefaultParameters(): array
     {
+        $parameters = $this->getConstructParameters();
         $params = [];
-        foreach ($this->getMethodParameters($method) as $parameter) {
-            if ($parameter->isDefaultValueAvailable()) {
+        foreach ($parameters as $parameter) {
+            if ($parameter->isOptional() && $parameter->isDefaultValueAvailable()) {
                 $params [$parameter->getName()] = $parameter->getDefaultValue();
             }
         }
-
         return $params;
-    }
-
-    public function hasMethod(string $method): bool
-    {
-        return $this->reflectionClass->hasMethod($method);
     }
 }

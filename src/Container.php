@@ -6,6 +6,7 @@ namespace Skernl\Container;
 use Psr\Container\ContainerExceptionInterface;
 use Psr\Container\ContainerInterface as PsrContainerInterface;
 use Psr\Container\NotFoundExceptionInterface;
+use Skernl\Container\Contract\SourceResolverInterface;
 use Skernl\Contract\ContainerInterface as SkernlContainerInterface;
 use Skernl\Container\Annotation\AnnotationTrigger;
 use Skernl\Container\Annotation\Mount;
@@ -26,21 +27,27 @@ class Container implements SkernlContainerInterface
     private array $resolvedEntries;
 
     /**
+     * @var SourceResolverInterface $definitionSource
+     */
+    protected SourceResolverInterface $definitionSource;
+
+    /**
      * @var ResolverDispatcher $resolverDispatcher
      */
     private ResolverDispatcher $resolverDispatcher;
 
-    /**
-     * @param DefinitionSource $definitionSource
-     */
-    public function __construct(protected DefinitionSource $definitionSource)
+    public function __construct(array $dependencies = [])
     {
+        $this->definitionSource = new SourceResolver($this);
         $this->resolverDispatcher = new resolverDispatcher($this);
-        $this->resolvedEntries = [
-            self::class => $this,
-            PsrContainerInterface::class => $this,
-            SkernlContainerInterface::class => $this,
-        ];
+        $this->resolvedEntries = $dependencies + [
+                self::class => $this,
+                PsrContainerInterface::class => $this,
+                SkernlContainerInterface::class => $this,
+                SourceResolver::class => $this->definitionSource,
+                SourceResolverInterface::class => $this->definitionSource,
+                ResolverDispatcher::class => $this->definitionSource,
+            ];
     }
 
     /**
@@ -80,7 +87,7 @@ class Container implements SkernlContainerInterface
             );
         }
 
-        return $this->resolvedEntries [$id] = $this->resolverDispatcher->resolve($definition);
+        return $this->resolverDispatcher->resolve($definition);
     }
 
     /**
@@ -101,16 +108,5 @@ class Container implements SkernlContainerInterface
         }
 
         return $this->definitionSource->hasDefinition($id);
-    }
-
-    /**
-     * @return Container
-     * @throws InvalidDefinitionException
-     */
-    public function __invoke(): static
-    {
-        $definition = $this->definitionSource->getDefinition(self::class);
-        $this->resolverDispatcher->resolve($definition);
-        return $this;
     }
 }

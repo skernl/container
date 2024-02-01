@@ -3,8 +3,7 @@ declare(strict_types=1);
 
 namespace Skernl\Container\Definition;
 
-use ReflectionClass;
-use ReflectionException;
+use Skernl\Container\Contract\DefinitionInterface;
 
 /**
  * @InterfaceDefinition
@@ -12,26 +11,27 @@ use ReflectionException;
  */
 class InterfaceDefinition implements DefinitionInterface
 {
-    /**
-     * @var bool $instantiable
-     */
-    private bool $instantiable = false;
-
-    /**
-     * @param ReflectionClass $reflectionClass
-     */
-    public function __construct(private readonly ReflectionClass $reflectionClass)
+    public function __construct()
     {
     }
 
-    public function isInstantiable()
+    #[\Override] public function getClassName()
     {
-        $instantiable = $this->reflectionClass->isInstantiable();
+        // TODO: Implement getClassName() method.
+    }
 
-        if (false === $instantiable) {
+    #[\Override] public function isInstantiable()
+    {
+        // TODO: Implement isInstantiable() method.
+    }
 
-        }
+    #[\Override] public function getConstructParameters()
+    {
+        // TODO: Implement getConstructParameters() method.
+    }
 
-
+    #[\Override] public function getConstructDefaultParameters()
+    {
+        // TODO: Implement getConstructDefaultParameters() method.
     }
 }

@@ -4,20 +4,33 @@ declare(strict_types=1);
 namespace Skernl\Container\Resolver;
 
 use Psr\Container\ContainerInterface;
-use Skernl\Container\Definition\ObjectDefinition;
+use ReflectionParameter;
 
 /**
  * @ParameterResolver
  * @\Skernl\Di\Resolver\ParameterResolver
  */
-class ParameterResolver
+readonly class ParameterResolver
 {
     public function __construct(private ContainerInterface $container)
     {
     }
 
-    public function resolveParameters(ObjectDefinition $objectDefinition)
+    /**
+     * @param ReflectionParameter[] $parameters
+     * @param array-key[] $arguments
+     * @return array
+     */
+    public function resolveParameters(array $parameters, array $arguments = []): array
     {
-        $parameters = $objectDefinition->getMethodParameters();
+        $params = [];
+        foreach ($parameters as $parameter) {
+            if (isset($arguments [$parameter->getName()])) {
+                $params [] = $arguments [$parameter->getName()];
+            } else {
+                $params [] = $this->container->get($parameter->getName());
+            }
+        }
+        return $params;
     }
 }

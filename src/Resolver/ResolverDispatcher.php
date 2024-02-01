@@ -4,10 +4,9 @@ declare(strict_types=1);
 namespace Skernl\Container\Resolver;
 
 use RuntimeException;
+use Skernl\Container\Contract\DefinitionInterface;
+use Skernl\Container\Contract\ResolverInterface;
 use Skernl\Contract\ContainerInterface;
-use Skernl\Container\Collector\ClassCollector;
-use Skernl\Container\Definition\DefinitionInterface;
-use Skernl\Container\Definition\InterfaceDefinition;
 use Skernl\Container\Definition\ObjectDefinition;
 use Skernl\Container\Exception\InvalidDefinitionException;
 

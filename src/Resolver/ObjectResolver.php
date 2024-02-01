@@ -6,11 +6,11 @@ namespace Skernl\Container\Resolver;
 use Closure;
 use Psr\Container\ContainerExceptionInterface;
 use Psr\Container\NotFoundExceptionInterface;
+use Skernl\Container\Contract\DefinitionInterface;
+use Skernl\Container\Contract\ResolverInterface;
 use Skernl\Contract\ContainerInterface;
-use Skernl\Container\Definition\DefinitionInterface;
 use Skernl\Container\Definition\ObjectDefinition;
 use Skernl\Container\Exception\InvalidDefinitionException;
-use Skernl\Container\Source\DynamicProxy;
 
 /**
  * @ObjectResolver
@@ -26,28 +26,6 @@ class ObjectResolver implements ResolverInterface
     }
 
     /**
-     * @param DefinitionInterface $definition
-     * @param array $parameters
-     * @return Closure
-     * @throws ContainerExceptionInterface
-     * @throws InvalidDefinitionException
-     * @throws NotFoundExceptionInterface
-     */
-    public function resolve(DefinitionInterface $definition, array $parameters = []): object
-    {
-        if ($definition instanceof ObjectDefinition) {
-            return $this->createInstance($definition);
-        }
-        throw new InvalidDefinitionException(
-            sprintf(
-                'Entry "%s" cannot be resolved: the class is not instanceof %s',
-                $definition->getClassName(),
-                'Skernl\Di\Definition\ObjectDefinition'
-            )
-        );
-    }
-
-    /**
      * @param ObjectDefinition $definition
      * @param array $parameters
      * @return bool
@@ -58,6 +36,26 @@ class ObjectResolver implements ResolverInterface
     }
 
     /**
+     * @param DefinitionInterface $definition
+     * @return object
+     * @throws ContainerExceptionInterface
+     * @throws InvalidDefinitionException
+     * @throws NotFoundExceptionInterface
+     */
+    public function resolve(DefinitionInterface $definition): object
+    {
+        $definition instanceof ObjectDefinition || throw new InvalidDefinitionException(
+            sprintf(
+                'Entry "%s" cannot be resolved: the class is not instanceof %s',
+                $definition->getClassName(),
+                'Skernl\Di\Definition\ObjectDefinition'
+            )
+        );
+        return $this->createInstance($definition);
+    }
+
+
+    /**
      * @param ObjectDefinition $objectDefinition
      * @return object
      * @throws ContainerExceptionInterface
@@ -66,25 +64,15 @@ class ObjectResolver implements ResolverInterface
      */
     private function createInstance(ObjectDefinition $objectDefinition): object
     {
-        if (!$objectDefinition->isInstantiable()) {
-            throw new InvalidDefinitionException(
-                sprintf(
-                    'Entry "%s" cannot be resolved: the class doesnt instantiable',
-                    $objectDefinition->getClassName()
-                )
-            );
-        }
-        $params = $this->parameterResolver->resolveParameters($objectDefinition);
-        $params = $this->getDefaultParameter($objectDefinition);
-        $class = $objectDefinition->getClassName();
-        $instance = new $class(... $params);
+        $parameters = $this->parameterResolver->resolveParameters(
+            $objectDefinition->getConstructParameters(),
+            $objectDefinition->getConstructDefaultParameters(),
+        );
+        $instance = new ($objectDefinition->getClassName())(... $parameters);
 
-        var_dump($class);
-        var_dump($params);
-        var_dump($instance);
         /**
          * @use $instance
-         * @var DynamicProxy|Closure $classObject
+         * @var object $classObject
          */
         $classObject = eval(<<<EOF
             return new class (\$instance) extends {$objectDefinition->getClassName()} {
@@ -95,19 +83,5 @@ class ObjectResolver implements ResolverInterface
          * @var Closure $classObject
          */
         return $classObject;
-    }
-
-    /**
-     * @param DefinitionInterface $definition
-     * @return object
-     * @throws ContainerExceptionInterface
-     * @throws NotFoundExceptionInterface
-     */
-    private function getDefaultParameter(DefinitionInterface $definition): object
-    {
-        $parameters = $definition->getMethodParameters('__construct');
-        $this->parameterResolver->resolve();
-        $type = $parameter->getType();
-        return $this->container->get($type->getName());
     }
 }

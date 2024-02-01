@@ -6,7 +6,6 @@ namespace Skernl\Container;
 use Composer\Autoload\ClassLoader;
 use ReflectionAttribute;
 use ReflectionClass;
-use Skernl\Di\DependencyInjection;
 
 /**
  * @Composer
@@ -16,38 +15,38 @@ class Composer
 {
     static protected Composer $instance;
 
-    private ClassLoader $classLoader;
+    static private ClassLoader $classLoader;
 
-    protected array $storageRoom = [];
+    static protected array $source = [];
 
-    protected array $annotation = [];
+    static protected array $annotation = [];
 
-    private function __construct()
+    static public function init(): void
     {
-        $this->loadClassMap();
-        $this->mountClassMap(
+        self::loadClassMap();
+        self::mountClassMap(
             array_keys(
-                $this->classLoader->getClassMap()
+                self::$classLoader->getClassMap()
             )
         );
+        self::$classLoader->unregister();
     }
 
-    static public function init(): Composer
+    static public function reflectClass(string $class)
     {
-        isset(self::$instance) || self::$instance = new static;
-        return self::$instance;
+        return self::$source [$class];
     }
 
-    private function loadClassMap(): void
+    static private function loadClassMap(): void
     {
         $loaders = ClassLoader::getRegisteredLoaders();
         /**
          * @var ClassLoader $classLoader
          */
-        $this->classLoader = reset($loaders);
-        $this->mountClassMap(
+        self::$classLoader = reset($loaders);
+        self::mountClassMap(
             array_keys(
-                $this->classLoader->getClassMap()
+                self::$classLoader->getClassMap()
             )
         );
     }
@@ -56,40 +55,25 @@ class Composer
      * @param array $classMap
      * @return void
      */
-    private function mountClassMap(array $classMap): void
+    static private function mountClassMap(array $classMap): void
     {
         $class = array_shift($classMap);
         if (class_exists($class)) {
             $collector = new ReflectionClass($class);
-            $this->storageRoom [$class] = $collector;
+            self::$source [$class] = $collector;
 //            empty($classAnnotations = $collector->getClassAnnotations())
-//            || $this->>mountClassAnnotations($class, $classAnnotations);
+//            || self::>mountClassAnnotations($class, $classAnnotations);
         }
-        empty($classMap) || $this->mountClassMap($classMap);
+        empty($classMap) || self::mountClassMap($classMap);
     }
 
-    private function mountClassAnnotations(string $class, array $classAnnotations): void
+    static private function mountClassAnnotations(string $class, array $classAnnotations): void
     {
         /**
          * @var ReflectionAttribute $annotation
          */
         foreach ($classAnnotations as $annotation) {
-            $this->annotation [$annotation->getName()] [$class] = $annotation->getArguments();
+            self::$annotation [$annotation->getName()] [$class] = $annotation->getArguments();
         }
-    }
-
-    public function __invoke(): object
-    {
-        $this->classLoader->unregister();
-//        $object = new DependencyInjection();
-        $object = (new ReflectionClass(DependencyInjection::class))->newInstanceArgs();
-
-        return new class() {
-            public function register()
-            {
-                var_dump(class_exists(\App\Controller\IndexController::class));
-            }
-        };
-
     }
 }

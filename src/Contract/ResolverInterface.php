@@ -1,9 +1,8 @@
 <?php
 declare(strict_types=1);
 
-namespace Skernl\Container\Resolver;
+namespace Skernl\Container\Contract;
 
-use Skernl\Container\Definition\DefinitionInterface;
 use Skernl\Container\Exception\InvalidDefinitionException;
 
 /**
@@ -14,16 +13,14 @@ interface ResolverInterface
 {
     /**
      * @param DefinitionInterface $definition
-     * @param array $parameters
      * @return mixed
      * @throws InvalidDefinitionException
      */
-    public function resolve(DefinitionInterface $definition, array $parameters = []): mixed;
+    public function resolve(DefinitionInterface $definition): mixed;
 
     /**
      * @param DefinitionInterface $definition
-     * @param array $parameters
      * @return bool
      */
-    public function isResolvable(DefinitionInterface $definition, array $parameters = []): bool;
+    public function isResolvable(DefinitionInterface $definition): bool;
 }
