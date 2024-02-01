@@ -36,18 +36,18 @@ class Container implements SkernlContainerInterface
      */
     private ResolverDispatcher $resolverDispatcher;
 
-    public function __construct(array $dependencies = [])
+    public function __construct()
     {
         $this->definitionSource = new SourceResolver($this);
         $this->resolverDispatcher = new resolverDispatcher($this);
-        $this->resolvedEntries = $dependencies + [
-                self::class => $this,
-                PsrContainerInterface::class => $this,
-                SkernlContainerInterface::class => $this,
-                SourceResolver::class => $this->definitionSource,
-                SourceResolverInterface::class => $this->definitionSource,
-                ResolverDispatcher::class => $this->definitionSource,
-            ];
+        $this->resolvedEntries = [
+            self::class => $this,
+            PsrContainerInterface::class => $this,
+            SkernlContainerInterface::class => $this,
+            SourceResolver::class => $this->definitionSource,
+            SourceResolverInterface::class => $this->definitionSource,
+            ResolverDispatcher::class => $this->definitionSource,
+        ];
     }
 
     /**

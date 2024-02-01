@@ -28,7 +28,7 @@ readonly class ParameterResolver
             if (isset($arguments [$parameter->getName()])) {
                 $params [] = $arguments [$parameter->getName()];
             } else {
-                $params [] = $this->container->get($parameter->getName());
+                $params [] = $this->container->get($parameter->getType()->getName());
             }
         }
         return $params;

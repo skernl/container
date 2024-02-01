@@ -31,6 +31,16 @@ class Composer
         return self::$source [$class];
     }
 
+    static public function getAnnotation(string $class)
+    {
+        return self::$annotation [$class];
+    }
+
+    static public function hasAnnotation(string $class): bool
+    {
+        return isset(self::$annotation [$class]);
+    }
+
     static private function loadClassMap(): void
     {
         $loaders = ClassLoader::getRegisteredLoaders();
@@ -44,11 +54,6 @@ class Composer
             )
         );
         self::$classLoader->unregister();
-        self::reload(
-            array_keys(
-                self::$classLoader->getClassMap()
-            )
-        );
     }
 
     /**
@@ -61,8 +66,8 @@ class Composer
         if (class_exists($class)) {
             $collector = new ReflectionClass($class);
             self::$source [$class] = $collector;
-//            empty($classAnnotations = $collector->getClassAnnotations())
-//            || self::>mountClassAnnotations($class, $classAnnotations);
+            empty($classAnnotations = $collector->getAttributes())
+            || self::mountClassAnnotations($class, $classAnnotations);
         }
         empty($classMap) || self::mountClassMap($classMap);
     }
@@ -73,14 +78,7 @@ class Composer
          * @var ReflectionAttribute $annotation
          */
         foreach ($classAnnotations as $annotation) {
-            self::$annotation [$annotation->getName()] [$class] = $annotation->getArguments();
-        }
-    }
-
-    static private function reload(array $classes): void
-    {
-        foreach ($classes as $class) {
-            spl_autoload_register(function () {});
+            self::$annotation [$class] [$annotation->getName()] = $annotation->getArguments();
         }
     }
 }
